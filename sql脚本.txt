@@ -1,0 +1,26 @@
+-- 明文密码用户数据
+CREATE TABLE member (
+	mid					VARCHAR(50),
+	password			VARCHAR(32),
+	name				VARCHAR(20),
+	locked				INT,
+	CONSTRAINT pk_mid PRIMARY KEY (mid)
+) engine = innodb;
+-- 测试数据
+INSERT INTO member(mid,password,name,locked) VALUES ('admin','hello','管理员',0) ;
+INSERT INTO member(mid,password,name,locked) VALUES ('mermaid','hello','老李',0) ;
+INSERT INTO member(mid,password,name,locked) VALUES ('mldn','java','隔壁老王',0) ;
+--  加密后的用户数据
+CREATE TABLE member (
+	mid					VARCHAR(50),
+	password			VARCHAR(32),
+	name				VARCHAR(20),
+	locked				INT,
+	CONSTRAINT pk_mid PRIMARY KEY (mid)
+) engine = innodb;
+-- 测试数据
+-- 盐值：ZGF2aWRfamF2YQ==
+-- 加密处理：密码{{盐值}}，迭代3次加密
+INSERT INTO member(mid,password,name,locked) VALUES ('admin','02FE086F7ABBE238F2CE5AE58DEB0289','管理员',0) ;
+INSERT INTO member(mid,password,name,locked) VALUES ('mermaid','02FE086F7ABBE238F2CE5AE58DEB0289','老李',0) ;
+INSERT INTO member(mid,password,name,locked) VALUES ('mldn','DDB70949010FB37B47C4F70ADE2DD365','隔壁老王',0) ;
